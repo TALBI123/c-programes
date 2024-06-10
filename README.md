@@ -1,2 +1,2 @@
 # c-programes
-This is first projects
+This is my first projects in c
