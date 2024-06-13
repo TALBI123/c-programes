@@ -1,71 +1,71 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-// o(n^3)
+// Find the number with the highest
+// frequency in an integer array.
 typedef struct
 {
     int num;
     int frq;
-} largest_frequency;
-int maximum(largest_frequency *array, int size)
+} Lrgfq;
+int maximum(Lrgfq *arr, int size)
 {
     if (size > 0)
     {
-        int max = maximum(array, size - 1);
-        return max > array[size].frq ? max : array[size].frq;
+        int max = maximum(arr, size - 1);
+        return max > arr[size].frq ? max : arr[size].frq;
     }
-    return array[size].frq;
+    return arr[size].frq;
 }
 int main()
 {
-    int tab[] = {5, 7, 8, 8, 9, 8, 9, 0, 5, 3};
-    int size = sizeof(tab) / sizeof(int);
-    int count, count2 = 0;
+    int arr[] = {6, 8, 7, 6, 3, 4, 6, 8, 9, 0, 5, 3, 2};
+    int size = sizeof(arr) / sizeof(int);
+    int count1, count2 = 0;
     bool check;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++) // O(n^3)
     {
+        count1 = 0;
         check = false;
-        count = 0;
         for (int j = 0; j < size; j++)
         {
             for (int k = 0; k < i; k++)
-            {
-                if (tab[i] == tab[k])
+                if (arr[i] == arr[k])
                     check = true;
-            }
             if (check)
                 break;
-            if (tab[i] == tab[j])
-                count++;
+            if (arr[i] == arr[j])
+                count1++;
         }
-        if (!check && count > 1)
+        if (!check && count1 > 1)
             count2++;
     }
-    largest_frequency *l_fr = (largest_frequency *)malloc(count2 * sizeof(largest_frequency));
+    Lrgfq *arr_L = (Lrgfq *)malloc(count2 * sizeof(Lrgfq));
     count2 = 0;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++) // O(n^3)
     {
+        count1 = 0;
         check = false;
-        count = 0;
         for (int j = 0; j < size; j++)
         {
             for (int k = 0; k < i; k++)
-            {
-                if (tab[i] == tab[k])
+                if (arr[i] == arr[k])
                     check = true;
-            }
             if (check)
                 break;
-            if (tab[i] == tab[j])
-                count++;
+            if (arr[i] == arr[j])
+                count1++;
         }
-        if (!check && count > 1)
+        if (!check && count1 > 1)
         {
-            l_fr[count2].num = tab[i];
-            l_fr[count2++].frq = count;
+            arr_L[count2].num = arr[i];
+            arr_L[count2++].frq = count1;
         }
     }
-    int max = l_fr[0].frq;
-    printf("\nThe lagest frequency is :%i",maximum(l_fr,count2-1));
-    free(l_fr);
+    int max = maximum(arr_L, count2);
+    for (int i = 0; i < count2; i++)
+    {
+        if (arr_L[i].frq == max)
+            printf(" %i is the number with highest frequency", arr_L[i].num);
+    }
 }
