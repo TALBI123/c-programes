@@ -7,6 +7,7 @@
 #define X 'X'
 #define O 'O'
 char boerd[ROW][COL];
+//this is a TIC TAC  TOE GAME IN C 
 int free_space()
 {
     int free = 9;
@@ -49,7 +50,7 @@ char winner(char win)
         {
             if (boerd[i][j] == win && i == j)
                 count1++;
-            if(boerd[i][j] && i == ROW-1-j)
+            if(boerd[i][j] == win && i == ROW-1-j)
                 count2++;
         }
     }
@@ -120,8 +121,8 @@ int main()
         boerd[x][y] = player;
         do
         {
-            x = rand() % 3;
-            y = rand() % 3;
+            x = rand() % ROW;
+            y = rand() % COL;
         } while (boerd[x][y] != ' ' && free_space() != 0);
         boerd[x][y] = computer;
         show_boerd();
@@ -135,5 +136,8 @@ int main()
             printf("\n\n\tYOU WIN\n");
             break;
         }
+        if(free_space()==0 && 
+        ( winner(player)=='w' || winner(computer)=='w'))
+            printf("\n\tNO ONE WIN\n");
     } while (free_space() != 0);
 }
