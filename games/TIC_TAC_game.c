@@ -107,6 +107,9 @@ int main()
     fill_boerd();
     do
     {
+        printf("\n");
+        system("pause");
+        system("cls");
         do
         {
             printf("\nCHOOSE A ROW NUMBER  (1-3):");
